@@ -6,15 +6,16 @@ class FileReader():
         self._fileName = filename
         self._Photos = []
         self._seqNumber = 1
+        self._numSlides = 0
 
     def readFile(self):
         file = open(self._fileName, "r")
 
         numSlides = int(file.readline())
+        self._numSlides = numSlides
 
         for line in file:
             photo = Photo()
-            print(line)
             line = line.split()
             photo.setID(self._seqNumber)
             self._seqNumber += 1
@@ -33,8 +34,9 @@ class FileReader():
 def main():
     file = FileReader("a_example.txt")
     photos = file.readFile()
-    for photo in photos:
-        print(photo.getID())
+    print(file._numSlides)
+    #for photo in photos:
+        #print(photo.getID())
 
 if __name__ == main():
     main()
