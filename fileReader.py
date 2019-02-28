@@ -5,7 +5,7 @@ class FileReader():
     def __init__(self, filename):
         self._fileName = filename
         self._Photos = []
-        self._seqNumber = 1
+        self._seqNumber = 0
         self._numPhotos = 0
 
     def readFile(self):
@@ -35,8 +35,8 @@ def main():
     file = FileReader("a_example.txt")
     photos = file.readFile()
     print(file._numPhotos)
-    #for photo in photos:
-        #print(photo.getID())
+    for photo in photos:
+        print(photo.getID())
 
 if __name__ == main():
     main()
