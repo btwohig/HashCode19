@@ -65,18 +65,59 @@ class SlideShow(object):
                 An int representing the interest factor.
         
         """
-        # 5 is just a dummy value
-        return 5
+        
+        # Get the tags that in common with both slides.
+        common_tag = self.tags_in_common(slide1, slide2)
+        
+        # Get the tags that are unique to each slide.
+        tags_in_slide1_only = self.tags_in_first_slide_only(slide1, slide2)
+        tags_in_slide2_only = self.tags_in_first_slide_only(slide2, slide1)
+        
+        # Calculate interest factor for this pair of slides.
+        interest_factor = min(len(common_tag), len(tags_in_slide1_only),
+                              len(tags_in_slide2_only))
+        
+        return interest_factor
     
+    def tags_in_common(self, slide1, slide2):
+        """ Return the number of tags in common between two slides' tags. """
+        
+        tags_in_slide1 = slide1.get_tags()
+        tags_in_slide2 = slide2.get_tags()
+        
+        return tags_in_slide2.intersection(tags_in_slide1)
+    
+    def tags_in_first_slide_only(self, slide1, slide2):
+        """ Return the number of tags that are only in slide1. """
+        
+        tags_in_slide1 = slide1.get_tags()
+        tags_in_slide2 = slide2.get_tags()
+        
+        return tags_in_slide1 - tags_in_slide2
+    
+    
+class DummySlideA(object):
+    """ Dummy Slide class for testing. """
+    
+    def get_tags(self):
+        return {1, 3, 5, 7, 9}
+
+
+class DummySlideB(object):
+    """ Another Dummy Slide class for testing. """
+    
+    def get_tags(self):
+        return {2, 4, 6, 7, 8, 9}
+
     
 def main():
     """ Mini test function. """
     
     ss = SlideShow()
-    ss.add_slide("slideA")
-    ss.add_slide("slideB")
+    ss.add_slide(DummySlideA())
+    ss.add_slide(DummySlideB())
     print(ss.get_slide_count(), "<- should be: 2")
-    print(ss.calculate_total_interest_factor(), "<- should be: 5")
+    print(ss.calculate_total_interest_factor(), "<- should be: 2")
     
 
 if __name__ == "__main__":
