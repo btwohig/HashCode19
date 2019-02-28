@@ -1,15 +1,18 @@
 class Photo:
-    def __init__(self, id ,orient, tagcount, tags):
-        self._id = id # Unique id of the photo
-        self._orient = orient # The photos orientation
-        self._tagCnt = tagcount # The number of tags
-        self._tags = tags # The tags associated with the photo
+    def __init__(self):
+        self._id = None # Unique id of the photo
+        self._orient = None # The photos orientation
+        self._tagCnt = 0 # The number of tags
+        self._tags = [] # The tags associated with the photo
 
     def getID(self):
         """
         Returns unique id as an int
         """
         return self._id
+
+    def setID(self, id):
+        self._id = id
 
     def getOrienType(self):
         """
@@ -18,11 +21,17 @@ class Photo:
         """
         return self._orient
 
+    def setOrienType(self, orienType):
+        self._orient = orienType
+
     def getTagCount(self):
         """
         Returns the number of tags associated to the photo as an int.
         """
         return self._tagCnt
+
+    def setTagCount(self, tagCount):
+        self._tagCnt = tagCount
 
     def getTags(self):
         """
@@ -30,9 +39,16 @@ class Photo:
         """
         return self._tags
 
+    def setTags(self, tags):
+        self._tags = tags
+
 
 def main():
-    photo = Photo(1, "H", 2, ["cat", "beach"])
+    photo = Photo()
+    photo.setID(1)
+    photo.setOrienType("H")
+    photo.setTagCount(2)
+    photo.setTags(["cat", "beach"])
     print("ID: ", photo.getID())
     print("Orientation Type: ",photo.getOrienType())
     print("Number of tags: ",photo.getTagCount())
