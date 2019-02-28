@@ -70,6 +70,8 @@ class SlideShow(object):
     
     
 def main():
+    """ Mini test function. """
+    
     ss = SlideShow()
     ss.add_slide("slideA")
     ss.add_slide("slideB")
